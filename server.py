@@ -17,8 +17,7 @@ while True:
         # Envia linhas de cabeçalho
         connectionSocket.send(('HTTP/1.1 200 OK\r\n\r\n').encode())
         # Envia o conteúdo do arquivo requisitado ao cliente
-        for i in range(0, len(saida)):
-            connectionSocket.send(saida[i].encode())
+        connectionSocket.send(saida.encode())
         connectionSocket.close()
     except IOError:
         # Envia resposta de arquivo não encontrado
