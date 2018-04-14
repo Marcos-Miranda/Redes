@@ -1,8 +1,8 @@
-# Importação do módulo socket
+# importação do módulo socket
 from socket import *
 serverSocket = socket(AF_INET, SOCK_STREAM)
 # Prepara o socket do servidor
-serverSocket.bind(('', 78))
+serverSocket.bind(('', 80))
 serverSocket.listen(1)
 while True:
 	print('O servidor está pronto para receber requisições...')
@@ -12,10 +12,10 @@ while True:
 	try:
 		mensagem = connectionSocket.recv(1024).decode();
 		print('Mensagem recebida')
-		if not mensagem:
-			nome_arquivo = 'erro404'
-		else:
-			nome_arquivo = mensagem.split()[1]
+		if len(mensagem) <= 1:
+			connectionSocket.close()
+			continue
+		nome_arquivo = mensagem.split()[1]
 		arquivo = open(nome_arquivo[1:])
 		saida = arquivo.read()
 		arquivo.close()
