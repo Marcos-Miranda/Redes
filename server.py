@@ -12,7 +12,7 @@ while True:
 	try:
 		mensagem = connectionSocket.recv(1024).decode();
 		print('Mensagem recebida')
-		if len(mensagem) <= 1:
+		if len(mensagem.split()) <= 1:
 			connectionSocket.close()
 			continue
 		nome_arquivo = mensagem.split()[1]
